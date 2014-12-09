@@ -1,5 +1,4 @@
 
-var listOfPersons = new Array();
 
 function CreateObjects() {
 
@@ -12,19 +11,18 @@ function CreateObjects() {
     var person2 = new Object();
     person2.lastname = "White";
 
-    console.log(person1);
-    console.log(person2);
-
-    DetectProperties(perosn1, person2);
-
-    listOfPersons.push(person1);
-    listOfPersons.push(person2);
+    CheckAllProperties(person1, person2);
 }
 
 
-function DetectProperties()
+function CheckAllProperties()
 {
-
+    for(var object in arguments) {
+        for(var property in object) {
+            console.log("Name:  " + property);
+            console.log("Value: " + object[property]);
+        }
+    }
 }
 
 CreateObjects();
