@@ -1,0 +1,8 @@
+{
+    "name": "ws-cursors"
+  , "version": "0.0.1"
+  , "dependencies": {
+        "express": "2.x.x"
+      , "websocket.io": "0.x.x"
+    }
+}
