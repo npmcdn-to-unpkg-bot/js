@@ -1,6 +1,7 @@
 
 
-function CreateObjects() {
+function CreateObjects()
+{
 
     // creating as object literal
     var person1 = {
@@ -12,15 +13,31 @@ function CreateObjects() {
     person2.lastname = "White";
 
     CheckAllProperties(person1, person2);
+
+    CheckOwnProperties(person1);
+    CheckOwnProperties(person2);
 }
 
+function CheckOwnProperties(obj)
+{
+    if(obj.hasOwnProperty("firstname"))
+    {
+        console.log(obj.firstname);
+    }
+}
 
 function CheckAllProperties()
 {
-    for(var object in arguments) {
-        for(var property in object) {
-            console.log("Name:  " + property);
-            console.log("Value: " + object[property]);
+    // var args = Array.prototype.slice.call(arguments);
+    // var args = Array.slice(arguments);  // Array generics is not available
+    //
+    // NOTE: to access the unnamed arguments through the 'arguments' keyword
+    // accessible in each JavaScript function, please note that this is NOT an
+    // array and it should not be parsed with for ... in; parsing by index works:
+    for(var i = 0; i < arguments.length; i++) {
+        var obj = arguments[i];
+        for(var property in obj) {
+            console.log("Property:  " + property + " - " + "Value: " + obj[property]);
         }
     }
 }
