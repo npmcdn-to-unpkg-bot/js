@@ -1,6 +1,6 @@
 
 
-function CreateObjects()
+(function createObjects()
 {
 
     // creating as object literal
@@ -12,21 +12,32 @@ function CreateObjects()
     var person2 = new Object();
     person2.lastname = "White";
 
-    CheckAllProperties(person1, person2);
+    checkAllProperties(person1, person2);
 
-    CheckOwnProperties(person1);
-    CheckOwnProperties(person2);
-}
+    checkOwnProperties(person1);
+    checkOwnProperties(person2);
+})();
 
-function CheckOwnProperties(obj)
+// There is a difference between the properties returned in a for-in loop
+// and the ones returned by Object.keys():
+// the for-in loop also enumerates prototype properties while Object.keys()
+// returns only own (instance) properties.
+//
+function checkOwnProperties(paramObject)
 {
-    if(obj.hasOwnProperty("firstname"))
+    if(paramObject.hasOwnProperty("firstname"))
     {
-        console.log(obj.firstname);
+        console.log(paramObject.firstname);
+    }
+
+    var properties = Object.keys(paramObject);
+    for(var i = 0; i < properties.length; i++)
+    {
+        console.log("Property:  " + properties[i] + " - " + "Value: " + paramObject[properties[i]]);
     }
 }
 
-function CheckAllProperties()
+function checkAllProperties()
 {
     // var args = Array.prototype.slice.call(arguments);
     // var args = Array.slice(arguments);  // Array generics is not available
@@ -42,4 +53,73 @@ function CheckAllProperties()
     }
 }
 
-CreateObjects();
+(function createObjectWithGetterAndSetter()
+{
+    var person =
+    {
+        _name: 'Nicholas',
+        get name()
+        {
+            console.log("Reading name");
+            return this._name;
+        }
+    }
+
+    console.log(person.name);
+
+    return person;
+})();
+
+// define single property:
+var anotherPerson = {
+    show : function()
+    {
+        console.log("name" in this);
+        console.log(this.name);
+    }
+};
+
+Object.defineProperty(anotherPerson, "name",
+    {
+       value: "Another Nicholas",
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+
+anotherPerson.show();
+
+
+// define multiple properties:
+
+var yetAnotherPerson = {};
+
+Object.defineProperties(yetAnotherPerson,
+    {
+        _name: {
+            value: "Also Nicholas",
+            enumerable: true,
+            configurable: true,
+            writable: true
+        },
+
+        // add accessor property
+        name: {
+            get: function() {
+                console.log("reading yet another name");
+                return this._name;
+            },
+            set: function(value) {
+                console.log("setting name to %s", value);
+                this._name = value;
+            },
+            enumerable: true,
+            configurable: true
+        }
+    });
+
+console.log("does it have name property: ", "name" in yetAnotherPerson);
+console.log("does it have _name property: ", "_name" in yetAnotherPerson);
+console.log(yetAnotherPerson.name);
+yetAnotherPerson.name = "Changed name for Nicholas";
+console.log(yetAnotherPerson.name);
