@@ -14,4 +14,5 @@ class Point {
 }
 var p = new Point(3,4);
 var dist = p.getDist();
+p.x = 100;  // has no effect!
 console.log("Hypotenuse is: " + dist);
