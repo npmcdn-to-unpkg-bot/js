@@ -3,17 +3,21 @@
 	<head>
 	<!-- http://campus.codeschool.com/courses/shaping-up-with-angular-js/level/2/section/1/video/1 -->
 		<!-- stylesheets -->
-		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap\css\bootstrap.css"/>
 	</head>
 	<body ng-controller="StoreController as store">
-		<div ng-repeat="product in store.products">
-			<h3>
-				{{product.name}}
-				<em class="pull-right">{{product.price | currency}} </em>
-				<p> {{product.description}} </p>
-				<button ng-show="product.canPurchase"> Add to Cart </button>
-			</h3>
-		</div>
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="product in store.products">
+				<h3>
+					{{product.name}}
+					<em class="pull-right">{{product.price | currency}} </em>
+					<!--
+					<p> {{product.description}} </p>
+					<button ng-show="product.canPurchase"> Add to Cart </button>
+					-->
+				</h3>
+			</li>
+		</ul>
 
 		<!-- third-party javascript -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
