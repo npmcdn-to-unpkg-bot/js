@@ -4,21 +4,102 @@
 	<!-- http://campus.codeschool.com/courses/shaping-up-with-angular-js/level/2/section/1/video/1 -->
 		<!-- stylesheets -->
 		<link rel="stylesheet" type="text/css" href="bootstrap\css\bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="css\custom.css"/>
 	</head>
-	<body ng-controller="StoreController as store">
-		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="product in store.products">
-				<h3>
-					{{product.name}}
-					<em class="pull-right">{{product.price | currency}} </em>
-					<!--
-					<p> {{product.description}} </p>
-					<button ng-show="product.canPurchase"> Add to Cart </button>
-					-->
-				</h3>
+	<body class="list-group" ng-controller="StoreController as store">
+		<header>
+			<h1 class="text-center">Flatlander Crafted Gems</h1>
+			<h2 class="text-center"> an Angular store </h2>
+		</header>
+		
+			<li class="list-group-item" ng-repeat="product in store.products | orderBy: 'price'">
+				<product-title></product-title>
+				
+				  <!-- Image Gallery  -->
+				  <div class='gallery' ng-show="product.images.length" ng-controller='GalleryController as gallery'>
+					<img ng-src="images/{{product.images[gallery.current].full}}" />
+					<ul class="list-inline thumbs">
+					  <li class="thumbnail" ng-repeat="image in product.images">
+						<img ng-src="images/{{image.thumb}}" />
+					  </li>
+					</ul>
+				  </div>				
+				
+				<section ng-controller="PanelController as panel"> <!-- panel is an alias -->
+					<ul class="nav nav-pills">
+						<li ng-class="{ active: panel.isSelected(1) }"> 
+							<a href ng-click="panel.selectTab(1)">Description</a>
+						</li>
+						<li ng-class="{ active: panel.isSelected(2) }">
+							<a href ng-click="panel.selectTab(2)">Specifications</a>
+						</li>
+						<li ng-class="{ active: panel.isSelected(3) }">
+							<a href ng-click="panel.selectTab(3)">Reviews</a>
+						</li>
+					</ul>
+				
+					<div class="panel" ng-show="panel.isSelected(1)">
+						<h4>Description</h4>
+						<blockquote>{{product.description}}</blockquote>
+					</div>
+					<div class="panel" ng-show="panel.isSelected(2)">
+						<h4>Specifications</h4>
+						<blockquote>None yet</blockquote>
+					</div>
+					<div class="panel" ng-show="panel.isSelected(3)">
+						<h4>Reviews</h4>
+						<blockquote ng-repeat="review in product.reviews">
+							<b>Stars: {{review.stars}}</b>
+							{{review.body}}
+							<cite class="clearfix">by: {{review.author}}</cite>
+						</blockquote>
+					</div>
+					
+					<form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+						ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+						
+						<!-- the following block is used for a Live preview -->
+						<blockquote>
+							<b>Stars: {{reviewCtrl.review.stars}}</b>
+							{{reviewCtrl.review.body}}
+							<cite class="clearfix">by: {{reviewCtrl.review.author}}</cite>							
+						</blockquote>
+						
+						<!-- the Review form itself -->
+						  <h4>Submit a Review</h4>
+						  <fieldset class="form-group">
+							<select ng-model="reviewCtrl.review.stars"
+								class="form-control"
+								ng-options="stars for stars in [5,4,3,2,1]"
+								title="Stars"
+								required>
+									<option value="">Rate the Product</option>
+							</select>
+						  </fieldset>
+						  <fieldset class="form-group">
+							<textarea ng-model="reviewCtrl.review.body"
+								class="form-control"
+								placeholder="Write a short review of the product..."
+								title="Review"
+								required>
+							</textarea>
+						  </fieldset>
+						  <fieldset class="form-group">
+							<input ng-model="reviewCtrl.review.author"
+								type="email" 
+								class="form-control"
+								placeholder="jimmyDean@example.org" 
+								title="Email" 
+								required/>
+						  </fieldset>
+						  <fieldset class="form-group">
+							<div> reviewForm is {{reviewForm.$valid}} </div>
+							<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+						  </fieldset>
+					</form>
+				</section>
 			</li>
-		</ul>
-
+		
 		<!-- third-party javascript -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 
