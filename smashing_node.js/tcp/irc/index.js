@@ -1,8 +1,8 @@
 
 var net = require('net');
 
-var client = net.createConnection(6667, 'irc.freenode.net')
-client.setEncoding('utf-8')
+var client = net.createConnection(3000, 'localhost');
+client.setEncoding('utf-8');
 
 client.on('connect', function () {
   client.write('NICK mynick\r\n');
