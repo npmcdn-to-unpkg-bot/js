@@ -5,7 +5,7 @@
 namespace app.components {
 
   export class TodoFooter extends React.Component<ITodoFooterProps, {}> {
-      
+
       public render() {
       var activeTodoWord = app.miscelanious.Utils.pluralize(this.props.count, 'item');
       var clearButton = null;
@@ -19,7 +19,7 @@ namespace app.components {
           </button>
         );
       }
-      
+
       // React idiom for shortcutting to `classSet` since it'll be used often
       var cx = React.addons.classSet;
       var nowShowing = this.props.nowShowing;
@@ -57,5 +57,6 @@ namespace app.components {
         </footer>
       );
     }
-  
+
   }
+}

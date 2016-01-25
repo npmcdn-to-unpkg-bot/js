@@ -1,8 +1,19 @@
 {
-    "private": true,
+  "name": "todo-typescript-react",
+  "version": "1.0.0",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
+  },
+  "license": "ISC",
+  "private": true,
   "dependencies": {
+    "classnames": "^2.1.5",
     "director": "^1.2.0",
     "react": "^0.13.3",
-    "todomvc-app-css": "^2.0.0"
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.1"
   }
 }

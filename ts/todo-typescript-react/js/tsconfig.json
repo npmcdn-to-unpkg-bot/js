@@ -28,5 +28,8 @@
         "footer.tsx",
         "todoItem.tsx"
     ],
-    "exclude": []
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }
