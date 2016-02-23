@@ -11,20 +11,6 @@ const counter = (state = 0, action) => {
   }
 };
 
-// the store binds together the 3 principles of Redux:
-// const { createStore } = Redux;
-// the above is equivalent to:
-// var createStore = Redux.createStore;
-// or import { createStore } from 'redux';
-
-const { createStore } = Redux;
-
-
-// create the store for the application state,
-// passing in the function to be used as the reducer
-// that manages the state updates
-const store = createStore(counter);
-
 const Counter = ({
   value,
   onIncrement,
@@ -37,14 +23,19 @@ const Counter = ({
   </div>
 );
 
+// create the store for the application state,
+// passing in the function to be used as the reducer
+// that manages the state updates
+const { createStore } = Redux;
+const store = createStore(counter);
 
 // the store has 3 important functions:
 // 1. get the state of the store / app
-console.log(store.getState());
+// console.log(store.getState());
 
 // 2. dispatch an action to manage the state of the application
-store.dispatch({type: "INCREMENT"});
-console.log(store.getState());
+// store.dispatch({type: "INCREMENT"});
+// console.log(store.getState());
 
 // 3. any time an action has been dispatched, the subscribed function will be called - for example to trigger immediately a rendering
 const render = () => {
@@ -56,10 +47,10 @@ const render = () => {
       value = {store.getState()}
       onIncrement = { () =>
         store.dispatch( {type: "INCREMENT"})
-                    }
+      }
       onDecrement = { () =>
-                      store.dispatch( {type: "DECREMENT"})
-                    }
+        store.dispatch( {type: "DECREMENT"})
+      }
     />,
     document.getElementById("root")
   );
@@ -67,8 +58,3 @@ const render = () => {
 
 store.subscribe(render);
 render();
-
-
-document.addEventListener('click', () => {
-  store.dispatch({ type: 'INCREMENT'});
-});
