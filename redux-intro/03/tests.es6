@@ -1,18 +1,10 @@
+
 "use strict";
 
-function counter(state, action) {
-  if (state === undefined) state = 0;
+import { counter } from './03';
 
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-    case "DECREMENT":
-      return state - 1;
-    default:
-      return state;
-  }
-}
-
+// simple unit tests to prove that the reducer
+// complies with the three principles
 expect(counter(0, { type: "INCREMENT" })).toEqual(1);
 
 expect(counter(1, { type: "INCREMENT" })).toEqual(2);

@@ -1,6 +1,6 @@
 
 const counter = (state = 0, action) => {
-  
+
   switch(action.type) {
     case "INCREMENT":
       return state + 1;
@@ -37,6 +37,7 @@ const Counter = ({
   </div>
 );
 
+
 // the store has 3 important functions:
 // 1. get the state of the store / app
 console.log(store.getState());
@@ -48,15 +49,15 @@ console.log(store.getState());
 // 3. any time an action has been dispatched, the subscribed function will be called - for example to trigger immediately a rendering
 const render = () => {
   // manually updating the DOM is definitely not the way...
-  // document.body.innerText = store.getState(); 
+  // document.body.innerText = store.getState();
   // using React:
   ReactDOM.render(
     <Counter
-      value = {store.getState()},
-      onIncrement = { () => 
-                     store.dispatch( {type: "INCREMENT"})
+      value = {store.getState()}
+      onIncrement = { () =>
+        store.dispatch( {type: "INCREMENT"})
                     }
-      onDecrement = { () => 
+      onDecrement = { () =>
                       store.dispatch( {type: "DECREMENT"})
                     }
     />,
@@ -71,32 +72,3 @@ render();
 document.addEventListener('click', () => {
   store.dispatch({ type: 'INCREMENT'});
 });
-
-
-// simple unit tests to prove that the reducer
-// complies with the three principles
-expect(
-  counter(0, {type: "INCREMENT"})
-).toEqual(1);
-
-expect(
-  counter(1, {type: "INCREMENT"})
-).toEqual(2);
-
-expect(
-  counter(2, {type: "DECREMENT"})
-).toEqual(1);
-
-expect(
-  counter(1, {type: "DECREMENT"})
-).toEqual(0);
-
-expect(
-  counter(2, {type: "SOMETHING_ELSE"})
-).toEqual(2);
-
-expect(
-  counter(undefined, {})
-).toEqual(0);
-
-console.log("Tests passed!");

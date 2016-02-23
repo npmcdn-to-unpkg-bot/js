@@ -1,3 +1,6 @@
+
+"use strict";
+
 class Shape {
     constructor (id, x, y) {
         this.id = id
@@ -23,9 +26,8 @@ class Circle extends Shape {
     }
 }
 
-/*
+
 var runner = (function() {
     var rectangle = new Rectangle("Rectangle#1", 0, 0, 100, 120);
-    console.log(rectangle.toString());
+    console.log(rectangle);
 } )();
-*/
