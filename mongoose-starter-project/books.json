@@ -1,0 +1,18 @@
+{
+	"_id" : ObjectId("57261f9d517ce5e938b06f83"),
+	"title" : "Refactoring the DOM",
+	"author" : "Scott Adams",
+	"category" : "Technology"
+}
+{
+	"_id" : ObjectId("57262006517ce5e938b06f84"),
+	"title" : "Learn Colloquial Speech",
+	"author" : "Susan Brown",
+	"category" : "Humanities"
+}
+{
+	"_id" : ObjectId("5726203a517ce5e938b06f85"),
+	"title" : "Behavioral Analytics",
+	"author" : "Matt DeWitt",
+	"category" : "Health"
+}
